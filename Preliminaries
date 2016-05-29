@@ -1,0 +1,13 @@
+In this project, I will develop codes for numerical calculation of continuous Fourier transform in 1d or 2d and planar Riesz transform.
+Before we begin, let me briefly summarize the plan in this document.
+1. Discretizing function
+For a given continuous function in R or R^2, we have to discretize it first. In this project, we will first truncate the domain, and then we pick the sample points, in our case, points in some grid with given widths. Therefore, we will set two sets of parameters, the truncation range M (in 2d, M1, M2), i.e. we will truncate f(x) to |x|<=M. Here M is a positive integer, preferably a power of 2. Then we divide each grid with width 1/N (in 2d, 1/N1, 1/N2 for each direction). Thus f(k) = f(-M + k/N), k=1, ..., 2NM will be our discretized function.
+For this discretization, we will implement the function discretize(f,M, N). Here f is a function, M, N are either scalar or 2 by 1 vector. M and N should have the same dimension.
+
+2. Fourier Transform
+We will implement approximate continuous transforms using fft in Matlab. So for that purpose, we have to see what exactly fft and ifft compute.
+fft and ifft actually calculates discrete fourier transform.
+Let X be a n by 1 vector. Then its discrete Fourier transform Y is also a n by 1 vector, given by
+Y(k) = sum_j=1 ^n X(j) W_n ^ (j-1)(k-1), where W_n = exp(-2pi i)/n.
+Also the inverse discrete Fourier transform is given by this:
+X(j) = (1/n) sum_k=1^n Y(k) W_n ^-(j-1)(k-1).
